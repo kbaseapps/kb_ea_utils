@@ -80,7 +80,7 @@ class kb_ea_utils:
         if retcode != 0:
             # not sure how to test this
             self.log(None, "".join(outputlines))
-            raise ValueError('Error running fastq_stats, return code: {}'.format(recode))
+            raise ValueError('Error running fastq_stats, return code: {}'.format(retcode))
         report = '====' + fastq_file + '====' + "\n"
         report += "".join(outputlines)
         return report
