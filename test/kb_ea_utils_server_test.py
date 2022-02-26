@@ -593,7 +593,7 @@ class kb_ea_utilsTest(unittest.TestCase):
         print ("\n\nRUNNING: test_get_fastq_ea_utils_stats()")
         print ("========================================\n\n")
         # figure out where the test data lives
-        pe_lib_info = self.getPairedEndLibInfo('mxtest_unit')
+        pe_lib_info = self.getPairedEndLibInfo('mxtes(t_un)it')  # test weird filename chars
         pprint(pe_lib_info)
 
         # run method
@@ -610,7 +610,7 @@ class kb_ea_utilsTest(unittest.TestCase):
         print ("\n\nRUNNING: test_run_app_fastq_ea_utils_stats()")
         print ("============================================\n\n")
         # figure out where the test data lives
-        pe_lib_info = self.getPairedEndLibInfo('mxtest_unit')
+        pe_lib_info = self.getPairedEndLibInfo('mxtes(t_un)it')
         pprint(pe_lib_info)
 
         # run method
@@ -626,7 +626,7 @@ class kb_ea_utilsTest(unittest.TestCase):
     def test_get_ea_utils_stats(self):
         print ("\n\nRUNNING: test_get_ea_utils_stats()")
         print ("==================================\n\n")
-        fastq_file = "data/mxtest_unit.fwd.fq"
+        fastq_file = "data/mxtes(t_un)it.fwd.fq"
         params={'read_library_path': fastq_file}
 
         report = self.getImpl().get_ea_utils_stats(self.getContext(), params)
@@ -636,7 +636,7 @@ class kb_ea_utilsTest(unittest.TestCase):
     def test_calculate_fastq_stats(self):
         print ("\n\nRUNNING: test_calculate_fastq_stats()")
         print ("=====================================\n\n")
-        fastq_file = "data/mxtest_unit.fwd.fq"
+        fastq_file = "data/mxtes(t_un)it.fwd.fq"
         params={'read_library_path': fastq_file}
 
         ea_stats = self.getImpl().calculate_fastq_stats(self.getContext(), params)
@@ -652,7 +652,7 @@ class kb_ea_utilsTest(unittest.TestCase):
         print ("==============================================\n\n")
 
         # figure out where the test data lives
-        pe_lib_info = self.getPairedEndLibInfo('mxtest_unit')
+        pe_lib_info = self.getPairedEndLibInfo('mxtes(t_un)it')
         pprint(pe_lib_info)
 
         #index_lane_lib_info = self.getPairedEndLibInfo('mxtest_index_lane_unit')
@@ -709,10 +709,10 @@ class kb_ea_utilsTest(unittest.TestCase):
         print ("==================================================\n\n")
 
         # figure out where the test data lives
-        pe_lib_info = self.getPairedEndLibInfo('mxtest_unit')
+        pe_lib_info = self.getPairedEndLibInfo('mxtes(t_un)it')
         pprint(pe_lib_info)
 
-        index_lane_lib_info = self.getSingleEndLibInfo('mxtest_index_lane_unit')
+        index_lane_lib_info = self.getSingleEndLibInfo('mxtest_ind (ex)_lane_unit')
         pprint(index_lane_lib_info)
 
         # run method
@@ -766,7 +766,7 @@ class kb_ea_utilsTest(unittest.TestCase):
         print ("==================================================\n\n")
 
         # figure out where the test data lives
-        pe_lib_info = self.getPairedEndLibInfo('mxtest_unit')
+        pe_lib_info = self.getPairedEndLibInfo('mxtes(t_un)it')
         pprint(pe_lib_info)
 
         #index_lane_lib_info = self.getPairedEndLibInfo('mxtest_index_lane_unit')
@@ -821,9 +821,9 @@ class kb_ea_utilsTest(unittest.TestCase):
 
         # figure out where the test data lives
         if (interLeaved):
-            pe_lib_info = self.getPairedEndInterleavedLibInfo('mxtest-header')
+            pe_lib_info = self.getPairedEndInterleavedLibInfo('mx(t)est-header')
         else:
-            pe_lib_info = self.getPairedEndLibInfo('mxtest-header')
+            pe_lib_info = self.getPairedEndLibInfo('mx(t)est-header')
 
         pprint(pe_lib_info)
 
@@ -904,7 +904,7 @@ class kb_ea_utilsTest(unittest.TestCase):
         print ("=====================================\n\n")
 
         # figure out where the test data lives
-        pe_lib_info = self.getPairedEndLibInfo('test-ov-a')
+        pe_lib_info = self.getPairedEndLibInfo('te(st-[o]v)-a')
         pprint(pe_lib_info)
 
         # run method
@@ -941,7 +941,7 @@ class kb_ea_utilsTest(unittest.TestCase):
         print ("==========================================\n\n")
 
         # figure out where the test data lives
-        pe_lib_set_info = self.getPairedEndLib_SetInfo(['test-ov-a','test-ov-b'])
+        pe_lib_set_info = self.getPairedEndLib_SetInfo(['te(st-[o]v)-a','test-ov- (b)'])
         pprint(pe_lib_set_info)
 
         # run method
