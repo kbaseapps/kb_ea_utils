@@ -65,22 +65,25 @@ class kb_ea_utils:
 
 
     def get_report_string (self, fastq_file):
-      cmd_string = " ".join (("fastq-stats", fastq_file));
-      try:
-          cmd_process = subprocess.Popen(cmd_string, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, shell=True)
-          outputlines = []
-          console = []
-          while True:
-             line = cmd_process.stdout.readline()
-             outputlines.append(line)
-             if not line: break
-             #self.log(console, line.replace('\n', ''))
-
-          report = '====' + fastq_file + '====' + "\n"
-          report += "".join(outputlines)
-      except:
-          report = "Error in processing " +  fastq_file
-      return report
+        cmd = ("fastq-stats", fastq_file)
+        cmd_process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+        outputlines = []
+        while True:
+            line = cmd_process.stdout.readline()
+            outputlines.append(line)
+            if not line: break
+            #self.log(console, line.replace('\n', ''))
+        
+        cmd_process.stdout.close()
+        retcode = cmd_process.wait()
+        self.log(None, 'return code: ' + str(retcode) + '\n')
+        if retcode != 0:
+            # not sure how to test this
+            self.log(None, "".join(outputlines))
+            raise ValueError('Error running fastq_stats, return code: {}'.format(retcode))
+        report = '====' + fastq_file + '====' + "\n"
+        report += "".join(outputlines)
+        return report
 
 
     def get_ea_utils_result (self,refid, input_params):
@@ -645,7 +648,7 @@ class kb_ea_utils:
             #p = subprocess.Popen(" ".join(multx_cmd), cwd=self.scratch, shell=False)
             #p = subprocess.Popen(" ".join(multx_cmd), cwd=self.scratch, shell=True)
 #            p = subprocess.Popen(" ".join(multx_cmd), stdout=subprocess.PIPE, stderr=subprocess.STDERR, cwd=self.scratch, shell=True)
-            p = subprocess.Popen(" ".join(multx_cmd), stdout=subprocess.PIPE, stderr=subprocess.STDOUT, cwd=self.scratch, shell=True)
+            p = subprocess.Popen(multx_cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, cwd=self.scratch)
         except:
             raise ValueError('Error starting subprocess for fastq-multx')
 
@@ -1467,7 +1470,7 @@ class kb_ea_utils:
         self.log(console, "Starting Fastq_Join with command:\n")
         self.log(console, " ".join(cmd))
 
-        cmdProcess = subprocess.Popen(" ".join(cmd), stdout=subprocess.PIPE, stderr=subprocess.STDOUT, shell=True)
+        cmdProcess = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
 
         outputlines = []
         while True:
@@ -1641,7 +1644,7 @@ class kb_ea_utils:
         print('    '+' '.join(determine_phred_cmd))
         #p = subprocess.Popen(" ".join(determine_phred_cmd), cwd=self.scratch, shell=True)
         #p = subprocess.Popen(" ".join(determine_phred_cmd), cwd=self.scratch, shell=False)
-        p = subprocess.Popen(" ".join(determine_phred_cmd), stdout=subprocess.PIPE, stderr=subprocess.STDOUT, cwd=self.scratch, shell=True)
+        p = subprocess.Popen(determine_phred_cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, cwd=self.scratch)
         phred_regime = p.stdout.readline()
         phred_regime.replace('\n', '')
         p.stdout.close()
