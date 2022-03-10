@@ -6,3 +6,6 @@
  
  ### Version 2.0.1
  - Changed SHOCK upload in unit tests to DataFileUtil.file_to_shock()
+
+ ### Version 2.0.2
+ - Fix bug w/ special chars in file names
